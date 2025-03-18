@@ -2,6 +2,8 @@ import streamlit as st
 import openai
 import os
 from dotenv import load_dotenv
+from src.vectorize import TextVectorizer
+from src.types import DocumentMetadata
 
 # Load environment variables
 load_dotenv()
@@ -126,6 +128,9 @@ with st.sidebar:
     
     if uploaded_file and st.button("アップロード"):
         text_content = uploaded_file.getvalue().decode("utf-8")
+        
+        # Initialize vectorizer
+        vectorizer = TextVectorizer()
         
         # テキストを分割してベクトル化
         chunks = vectorizer.split_text(text_content)
