@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 from typing import List, Dict
 
-from .chromadb import VectorStore
+from chromadb import VectorStore  # 変更: 絶対インポートに変更
 from .types import Message, ChatHistory, DocumentMetadata
 from .vectorize import TextVectorizer
 
