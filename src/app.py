@@ -92,12 +92,30 @@ def upload_section():
         
         st.success(f"ファイル '{uploaded_file.name}' を保存しました。")
 
+def area_info_section():
+    st.header("エリア情報")
+    
+    area = st.selectbox("エリアを選択してください", ["川越市", "エリア2", "エリア3"])
+    
+    if area:
+        # エリア情報を取得（ここではダミーデータを使用）
+        area_info = {
+            "川越市": "エリア1の詳細情報...",
+            "エリア2": "エリア2の詳細情報...",
+            "エリア3": "エリア3の詳細情報..."
+        }
+        
+        st.write(area_info[area])
+
 def main():
     st.title("AI チャットボット")
     
     # サイドバーにアップロード機能を追加
     with st.sidebar:
         upload_section()
+    
+    # メインセクションにエリア情報セクションを追加
+    area_info_section()
     
     # ...existing code...
 
