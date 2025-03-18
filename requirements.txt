@@ -1,3 +1,7 @@
 streamlit==1.32.0
 openai==1.12.0
-python-dotenv==1.0.0 
+python-dotenv==1.0.0
+flask==3.0.2
+langchain==0.1.9
+chromadb==0.4.22
+chroma-hnswlib==0.7.3
