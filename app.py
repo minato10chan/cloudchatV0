@@ -2,15 +2,19 @@ import streamlit as st
 import openai
 import os
 import sys
+from pathlib import Path
 
-# Add the src directory to the PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+# Add the current directory to PYTHONPATH
+current_dir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(current_dir))
 
-from dotenv import load_dotenv
+# Import local modules
+from src.chromadb import VectorStore
 from src.vectorize import TextVectorizer
 from src.types import DocumentMetadata
-import datetime
-from src.chromadb import VectorStore  # vector_storeが定義されているモジュールをインポート
+from datetime import datetime
+
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
