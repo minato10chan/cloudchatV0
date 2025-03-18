@@ -4,6 +4,8 @@ import os
 from dotenv import load_dotenv
 from src.vectorize import TextVectorizer
 from src.types import DocumentMetadata
+import datetime
+from some_module import vector_store  # vector_storeが定義されているモジュールをインポート
 
 # Load environment variables
 load_dotenv()
