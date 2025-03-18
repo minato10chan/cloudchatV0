@@ -111,3 +111,37 @@ with st.sidebar:
     
     st.divider()
     st.caption("© 2023 AI Chatbot")
+
+    # Add upload section
+    st.header("ドキュメントアップロード")
+    uploaded_file = st.file_uploader("テキストファイルをアップロード", type=['txt'])
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        area = st.text_input("エリア名")
+        major_category = st.text_input("大カテゴリ")
+    with col2:
+        sub_category = st.text_input("中カテゴリ")
+        source = st.text_input("ソース元")
+    
+    if uploaded_file and st.button("アップロード"):
+        text_content = uploaded_file.getvalue().decode("utf-8")
+        
+        # テキストを分割してベクトル化
+        chunks = vectorizer.split_text(text_content)
+        
+        # メタデータを作成
+        metadata = DocumentMetadata(
+            area=area,
+            major_category=major_category,
+            sub_category=sub_category,
+            source=source,
+            filename=uploaded_file.name,
+            upload_date=datetime.now().isoformat()
+        )
+        
+        # 各チャンクをChromaDBに保存
+        for chunk in chunks:
+            vector_store.add_document(chunk, metadata)
+        
+        st.success(f"ファイル '{uploaded_file.name}' を保存しました。")
