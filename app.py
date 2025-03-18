@@ -1,7 +1,13 @@
+import sys
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass
+
 import streamlit as st
 import openai
 import os
-import sys
 from pathlib import Path
 
 # Add the current directory to PYTHONPATH
