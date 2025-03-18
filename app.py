@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from src.vectorize import TextVectorizer
 from src.types import DocumentMetadata
 import datetime
-from some_module import vector_store  # vector_storeが定義されているモジュールをインポート
+from src.chromadb import VectorStore  # vector_storeが定義されているモジュールをインポート
 
 # Load environment variables
 load_dotenv()
@@ -146,6 +146,9 @@ with st.sidebar:
             filename=uploaded_file.name,
             upload_date=datetime.now().isoformat()
         )
+        
+        # Initialize vector store
+        vector_store = VectorStore()
         
         # 各チャンクをChromaDBに保存
         for chunk in chunks:
