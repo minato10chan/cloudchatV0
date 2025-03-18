@@ -1,6 +1,11 @@
 import streamlit as st
 import openai
 import os
+import sys
+
+# Add the src directory to the PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
 from dotenv import load_dotenv
 from src.vectorize import TextVectorizer
 from src.types import DocumentMetadata
