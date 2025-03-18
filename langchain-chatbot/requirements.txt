@@ -1,0 +1,6 @@
+langchain
+chromadb
+numpy
+pandas
+scikit-learn
+dotenv
