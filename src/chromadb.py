@@ -4,12 +4,19 @@ from typing import List, Dict, Any
 from datetime import datetime
 from .types import DocumentMetadata
 import uuid
+import os
 
 class VectorStore:
     def __init__(self, collection_name: str = "chat_history"):
+        # データ保存用のディレクトリを作成
+        persist_dir = os.path.join(os.getcwd(), "chroma_data")
+        os.makedirs(persist_dir, exist_ok=True)
+
+        # クライアントの設定を更新
         self.client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory="./data"
+            is_persistent=True,
+            persist_directory=persist_dir,
+            anonymized_telemetry=False
         ))
         self.collection = self.client.get_or_create_collection(collection_name)
 
