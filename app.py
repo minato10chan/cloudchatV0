@@ -9,6 +9,7 @@ import streamlit as st
 import openai
 import os
 from pathlib import Path
+from dotenv import load_dotenv  # dotenvをインポート
 
 # Add the current directory to PYTHONPATH
 current_dir = Path(__file__).parent.absolute()
@@ -20,13 +21,11 @@ from src.vectorize import TextVectorizer
 from src.types import DocumentMetadata
 from datetime import datetime
 
-from dotenv import load_dotenv
-
 # Load environment variables
-load_dotenv()
+load_dotenv()  # 環境変数をロード
 
 # Set up OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Page configuration
 st.set_page_config(
