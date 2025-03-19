@@ -116,12 +116,15 @@ with st.sidebar:
     """)
     
     # Add API key input
-    if not os.getenv("OPENAI_API_KEY"):
+    if not st.session_state.get("api_key"):
         st.warning("OpenAI API key not found in environment variables.")
         api_key = st.text_input("Enter your OpenAI API key:", type="password")
         if api_key:
+            st.session_state.api_key = api_key
             openai.api_key = api_key
             st.success("API key set successfully!")
+    else:
+        openai.api_key = st.session_state.api_key
     
     # Add a clear button
     if st.button("Clear Conversation"):
